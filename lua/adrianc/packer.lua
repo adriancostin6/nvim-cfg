@@ -29,8 +29,54 @@ vim.cmd([[
 -- +---------+-----------------------------------------------------------------
 -- | Plugins |
 -- +---------+
-return require'packer'.startup({function()
+return require'packer'.startup({function(use)
   use 'wbthomason/packer.nvim'
+
+  -- +------------+------------------------------------------------------------
+  -- | Completion |
+  -- +------------+
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      {
+        'L3MON4D3/LuaSnip',
+        requires = {
+          {'rafamadriz/friendly-snippets', event = 'InsertEnter'},
+        },
+        wants = 'friendly-snippets',
+        event = 'InsertEnter',
+        config = [[require'adrianc.plugins.completion._luasnip']],
+      },
+      {'onsails/lspkind.nvim', opt = true,},
+      {'kyazdani42/nvim-web-devicons', opt = true,},
+      {'hrsh7th/cmp-path',          after = 'nvim-cmp'},
+      {'hrsh7th/cmp-buffer',        after = 'nvim-cmp'},
+      {'hrsh7th/cmp-cmdline',       after = 'nvim-cmp'},
+      {'hrsh7th/cmp-nvim-lsp',      after = 'nvim-cmp',},
+      {'hrsh7th/cmp-nvim-lua',      after = 'nvim-cmp',},
+      {'saadparwaiz1/cmp_luasnip',  after = 'nvim-cmp',},
+    },
+    wants = {'LuaSnip', 'nvim-web-devicons', 'lspkind.nvim',},
+    event = 'InsertEnter',
+    config = [[require'adrianc.plugins.completion._cmp']],
+  }
+
+  -- +-----+-------------------------------------------------------------------
+  -- | LSP |
+  -- +-----+
+  use {
+    { 'williamboman/mason.nvim',
+       config = function() require'mason'.setup() end,
+    },
+    { 'williamboman/mason-lspconfig.nvim',
+      after = 'mason.nvim',
+      config = [[require'adrianc.plugins.lsp._masonlspconfig']],
+    },
+    { 'neovim/nvim-lspconfig',
+      after = {'mason.nvim', 'mason-lspconfig.nvim', },
+      config = [[require'adrianc.plugins.lsp._lspconfig']],
+    },
+  }
 
   -- +-----------+-------------------------------------------------------------
   -- | Telescope |

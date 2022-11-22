@@ -1,3 +1,9 @@
+local present, treesitter = pcall(require, "nvim-treesitter")
+
+if not present then
+  return
+end
+
 require 'nvim-treesitter.install'.compilers = { "clang" }
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
