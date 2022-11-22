@@ -32,6 +32,20 @@ vim.cmd([[
 return require'packer'.startup({function(use)
   use 'wbthomason/packer.nvim'
 
+  -- +-----+-------------------------------------------------------------------
+  -- | Git |
+  -- +-----+
+  use {
+    {
+      'lewis6991/gitsigns.nvim',
+      config = function() require'gitsigns'.setup()end,},
+    {
+      'sindrets/diffview.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      cmd = {'DiffviewOpen', 'DiffviewFileHistory'},
+    },
+  }
+
   -- +------------+------------------------------------------------------------
   -- | Completion |
   -- +------------+

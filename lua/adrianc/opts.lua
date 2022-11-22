@@ -27,3 +27,4 @@ opt.cursorline = true
 vim.wo.colorcolumn = '80'
 
 opt.clipboard = 'unnamedplus'
+
