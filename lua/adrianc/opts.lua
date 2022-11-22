@@ -21,7 +21,7 @@ opt.writebackup = false
 opt.undofile =  true
 opt.wrap = false
 
-opt.undodir = vim.fn.stdpath('config') .. '/undo'
+opt.undodir = vim.fn.stdpath('cache') .. '/undo'
 
 opt.cursorline = true
 vim.wo.colorcolumn = '80'
